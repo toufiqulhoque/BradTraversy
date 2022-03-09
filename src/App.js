@@ -1,44 +1,30 @@
-function App(){
-const title='Blog Post'
-const body='This is my blog post'
+import React, { useState } from 'react';
+import FeedbackList from './components/FeedbackList';
+import FeedbackStats from './components/FeedbackStats';
+import feedbackData from './data/FeedbackData';
+import Header from './Header';
 
-const comments=[
-    {id:1,text:'Comment one'},
-    {id:2,text:'Comment two'},
-    {id:3,text:'Comment three'}
-]
-const loading=false
-const showComments= true
-if(loading){
-    return <h1>Loading...</h1>
+
+const App = () => {
+const[feedback,setFeedback]=useState(feedbackData);
+
+const deleteFeedback=(id)=>{
+    if(window.confirm('Are you sure you want to delete')){
+
+        setFeedback(feedback.filter((item)=>item.id!==id))
+    }
+
 }
-
     return (
-       <div className="container">
-            <h1>{title.toUpperCase}</h1>
-        <p>{body}</p>
-<br />
-        {showComments? <ul>
-          {
-             comments.map((comment,index)=>(
-                <li key={index}>{comment.text}</li>
-               
-             )
+        <div>
+            <Header />
+            <div className="container">
+                <FeedbackStats feedback={feedback}/>
+                <FeedbackList feedback={feedback} handleDelete={deleteFeedback}/>
                 
-             )
-              
-          }
-        </ul>:'no'}
-        <br />
-        <br />
-        {Math.random()*5}
+            </div>
+        </div>
+    );
+};
 
-        <h3>Comments: {comments.length}</h3>
-        
-
-
-       </div>
-    )
-}
-
-export default App
+export default App;
