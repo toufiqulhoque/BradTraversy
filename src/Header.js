@@ -16,7 +16,7 @@ const Header = ({text}) => {
     );
 };
 Header.defaultProps={
-  text : 'Toufiq'           
+  text : 'Hello'           
 }
 
 export default Header;
